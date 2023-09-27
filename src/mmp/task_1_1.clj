@@ -1,4 +1,4 @@
-(ns mmp.task-1)
+(ns mmp.task-1-1)
 
 (defn add-char-to-string
   ([alphabet current-permutation res]
