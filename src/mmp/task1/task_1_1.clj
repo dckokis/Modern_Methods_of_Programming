@@ -27,6 +27,6 @@
 
 (defn main-1-1
   []
-  (println (create-string-list '(\a, \b, \c) 3 (list ""))))
+  (println (create-string-list '(\a \b \c) 3 (list ""))))
 
 (main-1-1)
