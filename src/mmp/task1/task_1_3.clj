@@ -7,6 +7,7 @@
        (fn [lst x] (cons (func x) lst))
        (list)
        coll))))
+
 (defn my-filter
   ([pred coll]
    (reverse

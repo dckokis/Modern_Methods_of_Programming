@@ -16,7 +16,6 @@
      (recur
        alphabet (rest permutations) (concat (add-char-to-string alphabet (first permutations) ()) res))
      res))
-
   ([alphabet permutations]
    (add-char-to-strings alphabet permutations ()))
   )
