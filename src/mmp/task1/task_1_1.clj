@@ -17,7 +17,6 @@
      res))
   )
 
-
 (defn create-string-list
   ([alphabet num res]
    (if (> num 0)

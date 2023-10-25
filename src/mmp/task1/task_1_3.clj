@@ -6,7 +6,8 @@
      (reduce
        (fn [lst x] (cons (func x) lst))
        (list)
-       coll))))
+       coll)))
+  )
 
 (defn my-filter
   ([pred coll]
@@ -15,4 +16,5 @@
        (fn [lst x]
          (if (pred x) (cons x lst) lst))
        (list)
-       coll))))
+       coll)))
+  )

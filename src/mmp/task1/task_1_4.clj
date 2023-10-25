@@ -1,12 +1,15 @@
 (ns mmp.task1.task-1-4)
 
-(defn add-char-to-string [chars string]
-  (map #(str string %) (filter #(not (= (last string) (get % 0))) chars)))
+(defn add-char-to-string [alphabet permutation]
+  (map #(str permutation %) (filter #(not (= (last permutation) (get % 0))) alphabet))
+  )
 
-(defn add-char-to-strings [chars strings]
-  (reduce concat (map #(add-char-to-string chars %) strings)))
+(defn add-char-to-strings [alphabet permutations]
+  (reduce concat (map #(add-char-to-string alphabet %) permutations))
+  )
 
-(defn create-string-list [chars n]
-  (if (and (not (= (count chars) 0)) (not (< n 0)))
-    (nth (iterate #(add-char-to-strings chars %) chars) (dec n))
-    '()))
+(defn create-string-list [alphabet n]
+  (if (and (not (= (count alphabet) 0)) (not (< n 0)))
+    (nth (iterate #(add-char-to-strings alphabet %) alphabet) (dec n))
+    '())
+  )
