@@ -7,24 +7,26 @@
 ;Not memoized---------------------------------
 (defn integral [f step x]
   (if (< 0 x)
-    (+ (integral f step (- x step)) (trapezia-area f (- x step) x))
+    (+ (integral f step (- x step)) (trapezia-area f x (- x step)))
     0)
   )
 
+;Memoized-------------------------------------
+(def integral-mem (memoize integral))
+
+;For comparison-------------------------------
 (defn part-integral [function step]
   (partial integral function step)
   )
 
-;Memoized-------------------------------------
-(defn integral-mem [function step]
-  (let [mem-integrate (memoize integral)]
-    (partial mem-integrate function step))
+(defn part-integral-mem [function step]
+  (partial integral-mem function step)
   )
 
 ;Comparison-----------------------------------
 (defn -main
   []
-  (let [integrate-mem (integral-mem #(* -4 %) 0.01)
+  (let [integrate-mem (part-integral-mem #(* -4 %) 0.01)
         integrate-base (part-integral #(* -4 %) 0.01)]
     (println "Not memoized")
     (time (integrate-base 50))
