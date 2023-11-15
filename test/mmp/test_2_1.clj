@@ -5,11 +5,15 @@
 
 (deftest integral-test
   (testing "Not memoized integral function"
+    ;f(x) = x
     (is (< (abs(- 12.5 (task2.1/integral (fn [x] x)  0.01 5))) 0.01))
+    ;f(x) = 3/2 * x^2
     (is (< (abs (- 500.0 (task2.1/integral (fn [x] (* (* x x) (/ 3 2))) 0.01 10))) 0.01)))
   )
 (deftest integral-mem-test
   (testing "Memoized integral function"
-    (is (< (abs(- 12.5 (task2.1/integral-mem (fn [x] x) 0.01 5))) 0.01))
-    (is (< (abs (- 500.0 (task2.1/integral-mem (fn [x] (* (* x x) (/ 3 2))) 0.01 10))) 0.01)))
+    ;f(x) = x
+    (is (< (abs (- 12.5 (task2.1/integral-memoized (fn [x] x) 0.01 5))) 0.01))
+    ;f(x) = 3/2 * x^2
+    (is (< (abs (- 500.0 (task2.1/integral-memoized (fn [x] (* (* x x) (/ 3 2))) 0.01 10))) 0.01)))
   )
