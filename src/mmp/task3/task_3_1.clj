@@ -8,7 +8,7 @@
         split (split-at slice-size coll)]
     (lazy-seq (cons (first split) (split-seq (second split) (rest slice-sizes))))))
 
-(defn split
+(defn slice
   [slice-count coll]
   (let [size (count coll)
         slice-size (quot size slice-count)
@@ -22,7 +22,7 @@
 
 (defn pfilter
   [pred threads-num coll]
-  (->> (split threads-num coll)
+  (->> (slice threads-num coll)
        (map #(future (doall (filter pred %))))
        (doall)
        (mapcat deref)))
@@ -31,7 +31,7 @@
   []
   (let [coll (take 100 (iterate inc 0))]
     (println "Standard filter:")
-    (time (println (doall (filter heavy-even? coll))))
+    (time (println (filter heavy-even? coll)))
     (println "Parallel filter:")
-    (time (println (doall (pfilter heavy-even? 20 coll))))
+    (time (println (pfilter heavy-even? 10 coll)))
     (shutdown-agents)))
