@@ -28,10 +28,10 @@
        (mapcat deref)))
 
 (defn lazy-pfilter
-  [pred step n coll]
-  (lazy-seq (concat (pfilter pred n (take step coll))
-                    (when (seq coll)
-                      (lazy-pfilter pred step n (drop step coll))))))
+  [pred step-size threads-num coll]
+  (lazy-seq (concat (pfilter pred threads-num (take step-size coll))
+                    (when (seq (drop step-size coll))
+                      (lazy-pfilter pred step-size threads-num (drop step-size coll))))))
 
 (defn -main
   []
@@ -41,5 +41,5 @@
     (println "Parallel filter:")
     (time (println (pfilter heavy-even? 10 coll)))
     (println "Lazy parallel filter:")
-    (time (println (lazy-pfilter heavy-even? 10 10 coll)))
+    (time (println (lazy-pfilter heavy-even? 50 10 coll)))
     (shutdown-agents)))

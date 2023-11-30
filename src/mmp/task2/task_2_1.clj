@@ -17,6 +17,8 @@
         (+ (integral-mem f step (- x step)) (trapezia f x (- x step)))
         0))))
 
+
+
 ;For comparison-------------------------------
 (defn part-integral [function step]
   (partial integral function step))
